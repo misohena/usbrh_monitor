@@ -217,7 +217,7 @@ private:
 	{
 		// 設定の読み込み
 		LoadSettingsFromRegistory();
-		CopySettingsVariablesToDlgItems();
+		CopySettingsVariablesToDlgItems(hWnd);
 
 		// ポップアップメニュー作成
 		hPopupMenu_ = ::LoadMenu(hInst_, _T("POPUPMENU"));
@@ -418,10 +418,11 @@ private:
 	 * 設定をメンバ変数からダイアログへコピーします。
 	 * レジストリから読み込んだ後やキャンセルの時などに使用します。
 	 */
-	void CopySettingsVariablesToDlgItems(void)
+	void CopySettingsVariablesToDlgItems(HWND hWnd = NULL)
 	{
-		SetDlgItemText(hWnd_, IDC_EDIT_OUTPUT_FILE, outputFilename_.c_str());
-		SetDlgItemText(hWnd_, IDC_EDIT_OUTPUT_URL, outputHTTPURL_.c_str());
+		if(!hWnd) { hWnd = hWnd_;}
+		SetDlgItemText(hWnd, IDC_EDIT_OUTPUT_FILE, outputFilename_.c_str());
+		SetDlgItemText(hWnd, IDC_EDIT_OUTPUT_URL, outputHTTPURL_.c_str());
 	}
 
 	/**
